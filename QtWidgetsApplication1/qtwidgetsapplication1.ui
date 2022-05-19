@@ -6,241 +6,725 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1073</width>
-    <height>835</height>
+    <width>1841</width>
+    <height>998</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>QtWidgetsApplication1</string>
   </property>
-  <widget class="QPushButton" name="OpenFileButton">
+  <widget class="QWidget" name="centralWidget" native="true">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>20</y>
-     <width>93</width>
-     <height>28</height>
+     <x>0</x>
+     <y>30</y>
+     <width>1561</width>
+     <height>961</height>
     </rect>
    </property>
-   <property name="text">
-    <string>載入圖片</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="image1">
-   <property name="geometry">
-    <rect>
-     <x>350</x>
-     <y>10</y>
-     <width>711</width>
-     <height>621</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QGroupBox" name="GroupBox1">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>70</y>
-     <width>331</width>
-     <height>121</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string>ROI</string>
-   </property>
-   <widget class="QPushButton" name="imageROI">
+   <widget class="MyQLabel" name="image1">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>0</y>
+      <width>1181</width>
+      <height>841</height>
+     </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>true</bool>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string>Original Image</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::AutoText</enum>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="OpenFileButton">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>50</y>
+      <y>10</y>
       <width>93</width>
       <height>28</height>
      </rect>
     </property>
     <property name="text">
-     <string>影像分割</string>
+     <string>載入圖片</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="imageX2">
+   <widget class="QSlider" name="ThresholdingSlider">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>70</y>
-      <width>91</width>
-      <height>31</height>
+      <x>20</x>
+      <y>210</y>
+      <width>311</width>
+      <height>22</height>
      </rect>
+    </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QTextEdit" name="imageY2">
+   <widget class="QGroupBox" name="GroupBox1">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>70</y>
-      <width>91</width>
-      <height>31</height>
+      <x>10</x>
+      <y>50</y>
+      <width>351</width>
+      <height>121</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QTextEdit" name="imageY1">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>30</y>
-      <width>91</width>
-      <height>31</height>
-     </rect>
+    <property name="title">
+     <string>ROI</string>
     </property>
-   </widget>
-   <widget class="QTextEdit" name="imageX1">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>30</y>
-      <width>91</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="html">
-     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+    <widget class="QPushButton" name="imageROI">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>93</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>影像分割</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="imageX2">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>70</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="imageY2">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>70</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="imageY1">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>30</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="imageX1">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>30</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="html">
+      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'PMingLiU'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>10</y>
+       <width>58</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Y軸</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>10</y>
+       <width>58</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>X軸</string>
+     </property>
+    </widget>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>10</y>
-      <width>58</width>
-      <height>15</height>
+      <x>20</x>
+      <y>190</y>
+      <width>81</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Y軸</string>
+     <string>影像二值化</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>10</y>
-      <width>58</width>
-      <height>15</height>
+      <x>10</x>
+      <y>370</y>
+      <width>351</width>
+      <height>111</height>
      </rect>
     </property>
-    <property name="text">
-     <string>X軸</string>
+    <property name="title">
+     <string>色彩空間轉換</string>
     </property>
+    <widget class="QPushButton" name="GrayButton">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>71</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Gray</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="HSVButton">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>30</y>
+       <width>71</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>HSV</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="YCrCbButton">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>71</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>YCrCb</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="RGBButton">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>70</y>
+       <width>71</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>RGB</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="YUVButton">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>30</y>
+       <width>71</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>YUV</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="LabButton">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>70</y>
+       <width>71</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Lab</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>250</y>
+      <width>351</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>影像資訊呈現</string>
+    </property>
+    <widget class="QPushButton" name="histButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>93</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>影像直方圖</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="EqualizationButton">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>30</y>
+       <width>93</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>直方圖等化</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="Width">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>20</y>
+       <width>121</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>寬：</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="Height">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>50</y>
+       <width>121</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>高：</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="MousePoint">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>80</y>
+       <width>291</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>影像點擊座標：(0,0)</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>500</y>
+      <width>351</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>濾波器Filters</string>
+    </property>
+    <widget class="QPushButton" name="AveragingButton">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>93</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Averaging</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="GaussianButton">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>20</y>
+       <width>93</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Gaussian</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="MedianButton">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>20</y>
+       <width>93</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Median</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="LaplacianButton">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>60</y>
+       <width>93</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Laplacian</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="SobelButton">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>60</y>
+       <width>93</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Sobel</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>610</y>
+      <width>351</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>幾何轉換功能</string>
+    </property>
+    <widget class="QPushButton" name="TranslationButton">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>93</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Translation</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="TranslationX">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>20</y>
+       <width>131</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string/>
+     </property>
+     <property name="placeholderText">
+      <string>輸入平移數值 X</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="TranslationY">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>60</y>
+       <width>131</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string/>
+     </property>
+     <property name="placeholderText">
+      <string>輸入平移數值 Y</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="RotateLButton">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>180</y>
+       <width>91</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Rotate Left</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="RotateRButton">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
+       <y>180</y>
+       <width>91</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Rotate Right</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="AffineTransformButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>120</y>
+       <width>111</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>AffineTransform</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="ATx1">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>100</y>
+       <width>61</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>X1</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="ATy1">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>140</y>
+       <width>61</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Y1</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="ATx2">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>100</y>
+       <width>61</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>X2</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="ATy2">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>140</y>
+       <width>61</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Y2</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="ATx3">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>100</y>
+       <width>61</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>X3</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="ATy3">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>140</y>
+       <width>61</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Y3</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="PTButton">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>170</y>
+       <width>131</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>PerspectiveTransform</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PTpoint1">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>220</y>
+       <width>331</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>X1：0｜X2：0｜X3：0｜X4：0</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PTpoint2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>250</y>
+       <width>331</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Y1：0｜Y2：0｜Y3：0｜Y4：0</string>
+     </property>
+    </widget>
    </widget>
   </widget>
-  <widget class="QPushButton" name="histButton">
+  <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>20</y>
+     <x>0</x>
+     <y>0</y>
+     <width>1841</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>工作列</string>
+    </property>
+   </widget>
+   <addaction name="menu"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>4</width>
+     <height>14</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>3</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Button11">
+   <property name="geometry">
+    <rect>
+     <x>1570</x>
+     <y>30</y>
      <width>93</width>
      <height>28</height>
     </rect>
    </property>
    <property name="text">
-    <string>影像直方圖</string>
+    <string>鏡頭</string>
    </property>
   </widget>
-  <widget class="QSlider" name="ThresholdingSlider">
+  <widget class="QPushButton" name="decorationButton">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>220</y>
-     <width>311</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="maximum">
-    <number>255</number>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>200</y>
-     <width>81</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>影像二值化</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="EqualizationButton">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>250</y>
+     <x>1680</x>
+     <y>30</y>
      <width>93</width>
      <height>28</height>
     </rect>
    </property>
    <property name="text">
-    <string>直方圖等化</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="GrayButton">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>250</y>
-     <width>93</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>To Gray</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="HSVButton">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>250</y>
-     <width>93</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>To HSV</string>
+    <string>Decoration</string>
    </property>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>MyQLabel</class>
+   <extends>QLabel</extends>
+   <header location="global">myqlabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
-  <include location="qtwidgetsapplication1.qrc"/>
+  <include location="QtWidgetsApplication1.qrc"/>
  </resources>
  <connections>
-  <connection>
-   <sender>OpenFileButton</sender>
-   <signal>clicked()</signal>
-   <receiver>QtWidgetsApplication1Class</receiver>
-   <slot>on_OpenFileButton_Clicked()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>536</x>
-     <y>133</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>199</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>imageROI</sender>
    <signal>clicked()</signal>
@@ -249,11 +733,11 @@ p, li { white-space: pre-wrap; }
    <hints>
     <hint type="sourcelabel">
      <x>66</x>
-     <y>513</y>
+     <y>162</y>
     </hint>
     <hint type="destinationlabel">
-     <x>536</x>
-     <y>324</y>
+     <x>544</x>
+     <y>377</y>
     </hint>
    </hints>
   </connection>
@@ -265,11 +749,11 @@ p, li { white-space: pre-wrap; }
    <hints>
     <hint type="sourcelabel">
      <x>156</x>
-     <y>33</y>
+     <y>62</y>
     </hint>
     <hint type="destinationlabel">
-     <x>536</x>
-     <y>417</y>
+     <x>544</x>
+     <y>377</y>
     </hint>
    </hints>
   </connection>
@@ -281,43 +765,27 @@ p, li { white-space: pre-wrap; }
    <hints>
     <hint type="sourcelabel">
      <x>175</x>
-     <y>230</y>
+     <y>259</y>
     </hint>
     <hint type="destinationlabel">
-     <x>536</x>
-     <y>417</y>
+     <x>544</x>
+     <y>377</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>EqualizationButton</sender>
+   <sender>OpenFileButton</sender>
    <signal>clicked()</signal>
    <receiver>QtWidgetsApplication1Class</receiver>
-   <slot>HEqualization()</slot>
+   <slot>on_OpenFileButton_Clicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>66</x>
-     <y>263</y>
+     <x>56</x>
+     <y>62</y>
     </hint>
     <hint type="destinationlabel">
-     <x>536</x>
-     <y>417</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>HSVButton</sender>
-   <signal>clicked()</signal>
-   <receiver>QtWidgetsApplication1Class</receiver>
-   <slot>ToHSV()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>266</x>
-     <y>263</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>536</x>
-     <y>417</y>
+     <x>544</x>
+     <y>377</y>
     </hint>
    </hints>
   </connection>
@@ -329,11 +797,299 @@ p, li { white-space: pre-wrap; }
    <hints>
     <hint type="sourcelabel">
      <x>166</x>
-     <y>263</y>
+     <y>292</y>
     </hint>
     <hint type="destinationlabel">
-     <x>536</x>
-     <y>417</y>
+     <x>544</x>
+     <y>377</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>HSVButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>ToHSV()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>266</x>
+     <y>292</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>544</x>
+     <y>377</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>EqualizationButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>HEqualization()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>66</x>
+     <y>292</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>544</x>
+     <y>377</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>YCrCbButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>ToYCrCb()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>225</x>
+     <y>413</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>544</x>
+     <y>377</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>RGBButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>ToRGB()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>305</x>
+     <y>413</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>544</x>
+     <y>377</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LabButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>ToLab()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>225</x>
+     <y>453</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>544</x>
+     <y>377</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>YUVButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>ToYUV()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>225</x>
+     <y>413</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>544</x>
+     <y>377</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>AveragingButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>AveragingFilter()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>76</x>
+     <y>533</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>575</x>
+     <y>377</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>GaussianButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>GaussianFilter()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>176</x>
+     <y>533</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>575</x>
+     <y>377</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LaplacianButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>LaplacianFilter()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>176</x>
+     <y>573</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>575</x>
+     <y>377</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MedianButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>MedianFilter()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>276</x>
+     <y>533</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>575</x>
+     <y>377</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SobelButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>SobelFilter()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>76</x>
+     <y>573</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>575</x>
+     <y>377</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>TranslationButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>TranslationImage()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>76</x>
+     <y>665</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>575</x>
+     <y>425</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>RotateLButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>Rotateleft()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>76</x>
+     <y>723</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>575</x>
+     <y>425</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>RotateRButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>Rotateright()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>226</x>
+     <y>723</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>575</x>
+     <y>425</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>AffineTransformButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>AffineTransform()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>85</x>
+     <y>783</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>575</x>
+     <y>425</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>PTButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>PerspectiveTransform()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>75</x>
+     <y>830</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>575</x>
+     <y>495</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Button11</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>testtest()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1616</x>
+     <y>43</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>920</x>
+     <y>498</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>decorationButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>decoration()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1726</x>
+     <y>43</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>920</x>
+     <y>498</y>
     </hint>
    </hints>
   </connection>
@@ -346,5 +1102,22 @@ p, li { white-space: pre-wrap; }
   <slot>HEqualization()</slot>
   <slot>ToGray()</slot>
   <slot>ToHSV()</slot>
+  <slot>ToRGB()</slot>
+  <slot>ToYCrCb()</slot>
+  <slot>ToYUV()</slot>
+  <slot>ToLab()</slot>
+  <slot>AveragingFilter()</slot>
+  <slot>GaussianFilter()</slot>
+  <slot>MedianFilter()</slot>
+  <slot>SobelFilter()</slot>
+  <slot>LaplacianFilter()</slot>
+  <slot>BilateralFilter()</slot>
+  <slot>TranslationImage()</slot>
+  <slot>Rotateleft()</slot>
+  <slot>Rotateright()</slot>
+  <slot>AffineTransform()</slot>
+  <slot>PerspectiveTransform()</slot>
+  <slot>testtest()</slot>
+  <slot>decoration()</slot>
  </slots>
 </ui>
