@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1841</width>
-    <height>998</height>
+    <width>1756</width>
+    <height>931</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,7 +28,7 @@
       <x>370</x>
       <y>0</y>
       <width>1181</width>
-      <height>841</height>
+      <height>891</height>
      </rect>
     </property>
     <property name="mouseTracking">
@@ -649,6 +649,19 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </widget>
+   <widget class="QPushButton" name="SaveFileButton">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>10</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>儲存圖片</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -686,7 +699,7 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="Button11">
+  <widget class="QPushButton" name="VideoCaptureButton">
    <property name="geometry">
     <rect>
      <x>1570</x>
@@ -699,17 +712,82 @@ p, li { white-space: pre-wrap; }
     <string>鏡頭</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="decorationButton">
+  <widget class="QPushButton" name="decorationButton1">
    <property name="geometry">
     <rect>
-     <x>1680</x>
-     <y>30</y>
+     <x>1570</x>
+     <y>70</y>
      <width>93</width>
      <height>28</height>
     </rect>
    </property>
    <property name="text">
-    <string>Decoration</string>
+    <string>小丑眼鏡</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="decorationButton3">
+   <property name="geometry">
+    <rect>
+     <x>1570</x>
+     <y>570</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>聖誕老人</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="decorationButton2">
+   <property name="geometry">
+    <rect>
+     <x>1570</x>
+     <y>270</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>狗臉</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="decoration_image1">
+   <property name="geometry">
+    <rect>
+     <x>1570</x>
+     <y>110</y>
+     <width>181</width>
+     <height>151</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="decoration_image2">
+   <property name="geometry">
+    <rect>
+     <x>1570</x>
+     <y>310</y>
+     <width>181</width>
+     <height>251</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="decoration_image3">
+   <property name="geometry">
+    <rect>
+     <x>1570</x>
+     <y>610</y>
+     <width>181</width>
+     <height>251</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>
@@ -1062,10 +1140,10 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>Button11</sender>
+   <sender>VideoCaptureButton</sender>
    <signal>clicked()</signal>
    <receiver>QtWidgetsApplication1Class</receiver>
-   <slot>testtest()</slot>
+   <slot>OpenVideoCapture()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>1616</x>
@@ -1078,10 +1156,10 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>decorationButton</sender>
+   <sender>decorationButton1</sender>
    <signal>clicked()</signal>
    <receiver>QtWidgetsApplication1Class</receiver>
-   <slot>decoration()</slot>
+   <slot>decoration1()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>1726</x>
@@ -1090,6 +1168,54 @@ p, li { white-space: pre-wrap; }
     <hint type="destinationlabel">
      <x>920</x>
      <y>498</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SaveFileButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>savefile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>156</x>
+     <y>53</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>877</x>
+     <y>465</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>decorationButton2</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>decoration2()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1606</x>
+     <y>103</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>877</x>
+     <y>465</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>decorationButton3</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWidgetsApplication1Class</receiver>
+   <slot>decoration3()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1606</x>
+     <y>213</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>877</x>
+     <y>465</y>
     </hint>
    </hints>
   </connection>
@@ -1117,7 +1243,10 @@ p, li { white-space: pre-wrap; }
   <slot>Rotateright()</slot>
   <slot>AffineTransform()</slot>
   <slot>PerspectiveTransform()</slot>
-  <slot>testtest()</slot>
-  <slot>decoration()</slot>
+  <slot>OpenVideoCapture()</slot>
+  <slot>decoration1()</slot>
+  <slot>savefile()</slot>
+  <slot>decoration2()</slot>
+  <slot>decoration3()</slot>
  </slots>
 </ui>

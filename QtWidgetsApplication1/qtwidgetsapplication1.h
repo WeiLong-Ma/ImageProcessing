@@ -16,8 +16,10 @@ public:
 private:
     Ui::QtWidgetsApplication1Class ui;
 
+
 private slots:
     void on_OpenFileButton_Clicked();
+    void savefile();
     void imageROI();
     void histimage();
     void Thresholding();
@@ -40,6 +42,10 @@ private slots:
     void Mouse_Pressed();
     void PerspectiveTransformPoint();
     void PerspectiveTransform();
-    void testtest();
-    void decoration();
+    void OpenVideoCapture();
+    void decoration1();
+    void decoration2();
+    void decoration3();
+    
+    
 };

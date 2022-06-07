@@ -19,6 +19,15 @@ QtWidgetsApplication1::QtWidgetsApplication1(QWidget *parent)
     connect(ui.image1, SIGNAL(MousePos()), this, SLOT(Mouse_Pressed()));
     //連結MyQLabel.h的MousePos()與qtwid..h的Mouse_Pressed()
     connect(ui.image1, SIGNAL(MousePPos()), this, SLOT(PerspectiveTransformPoint()));
+    QPixmap pixmap1("ClownGlasses.png");
+    ui.decoration_image1->setPixmap(pixmap1);
+    ui.decoration_image1->setScaledContents(true); 
+    QPixmap pixmap2("dog.png");
+    ui.decoration_image2->setPixmap(pixmap2);
+    ui.decoration_image2->setScaledContents(true);
+    QPixmap pixmap3("SantaClaus.png");
+    ui.decoration_image3->setPixmap(pixmap3);
+    ui.decoration_image3->setScaledContents(true);
 }
 // cv::Mat轉換成QImage
 QImage cvMat2QImage(const Mat& mat)
@@ -78,7 +87,13 @@ Mat QImage2cvMat(QImage image)
     }
     return mat;
 }
-
+void QtWidgetsApplication1::savefile() {
+    QString filename = QFileDialog::getSaveFileName(this, tr("選擇"), "", tr("Images(*.png *.jpg *.jpeg *.gif)"));
+    if (filename != 0) {
+        Mat image = QImage2cvMat(ui.image1->pixmap()->toImage());
+        imwrite(filename.toLocal8Bit().data(), image);
+    }
+}
 
 void QtWidgetsApplication1::on_OpenFileButton_Clicked() { //qt右下信號編輯
     QString filename = QFileDialog::getOpenFileName(this, tr("選擇"), "", tr("Images(*.png *.jpg *.jpeg *.gif)"));
@@ -431,9 +446,60 @@ void QtWidgetsApplication1::PerspectiveTransform() {
         QMessageBox::warning(NULL, "訊息方塊", "請載入圖片");
     }
 }
-void QtWidgetsApplication1::testtest() {
+
+bool addphoto(cv::Mat& dst, cv::Mat& src,
+    double scale = 1.0, //整體透明度
+    double size = 1.0,//圖片縮放比例
+    double angle = 0,//圖片旋轉角度
+    cv::Point location = cv::Point(0, 0)//圖片位置
+)
+{
+    /*if (dst.channels() != 3 || src.channels() != 4 || location.x > dst.cols || location.y > dst.cols)
+    {
+        return false;
+    }*/
+
+
+    cv::Mat small_size = src.clone();
+
+    if (size != 1 || angle != 0) {
+        int width = src.cols > (dst.cols - location.x) ? (dst.cols - location.x) : src.cols;
+        int length = src.rows > (dst.rows - location.y) ? (dst.rows - location.y) : src.rows;
+        cv::Mat rotation = cv::getRotationMatrix2D(cv::Point2f(length / 2, width / 2), angle, size);
+        cv::warpAffine(small_size, small_size, rotation, cv::Size(width, length));
+    }
+    //imshow("test", small_size);
+    //std::cout << small_size.cols << " " << small_size.rows << std::endl;
+    cv::Mat dst_part(dst, cv::Rect(location.x, location.y, small_size.cols, small_size.rows));
+
+    std::vector<cv::Mat>src_channels;
+    std::vector<cv::Mat>dst_channels;
+    split(small_size, src_channels);
+    split(dst_part, dst_channels);
+    //	CV_Assert(src_channels.size() == 4 && dst_channels.size() == 3);
+
+    if (scale < 1)
+    {
+        src_channels[3] *= scale;
+        scale = 1;
+    }
+    for (int i = 0; i < 3; i++)
+    {
+        dst_channels[i] = dst_channels[i].mul(255.0 / scale - src_channels[3], scale / 255.0);
+        dst_channels[i] += src_channels[i].mul(src_channels[3], scale / 255.0);
+    }
+    merge(dst_channels, dst_part);
+    return true;
+}
+
+void QtWidgetsApplication1::OpenVideoCapture() {
+
+    CascadeClassifier detector1, detector2;
+    detector2.load("haarcascade_eye_tree_eyeglasses.xml");
+    detector1.load("haarcascade_frontalface_default.xml");
+    Mat img2 = imread("ClownGlasses.png", -1);
     VideoCapture cap(0);
-    Mat frame;
+    Mat frame,frame2;
     imshow("help", imread("help.jpg"));
     while (true) {
         bool ret = cap.read(frame);
@@ -441,20 +507,79 @@ void QtWidgetsApplication1::testtest() {
             QMessageBox::warning(NULL, "error", "can't find camera");
             break;
         }
-        //imshow("help", frame);
-        QImage Qcamera = cvMat2QImage(frame);
-        ui.image1->setPixmap(QPixmap::fromImage(Qcamera));
-        ui.image1->resize(ui.image1->pixmap()->size());
-        ui.Width->setText("寬：" + QVariant(ui.image1->width()).toString());
-        ui.Height->setText("高：" + QVariant(ui.image1->height()).toString());
+        frame.copyTo(frame2);
+        rectangle(frame, Rect(192,70,280,350), Scalar(0, 0, 255), 2, 8);
         if (waitKey(1) == 'q') { //27 = esc
             QMessageBox::warning(NULL, "close", "close");
-            ui.image1->clear();
+            //ui.image1->clear();
             destroyWindow("help");
             break;
         }
+        imshow("help", frame);
     }
+    QImage Qcamera = cvMat2QImage(frame2);
+    ui.image1->setPixmap(QPixmap::fromImage(Qcamera));
+    ui.image1->resize(ui.image1->pixmap()->size());
+    ui.Width->setText("寬：" + QVariant(ui.image1->width()).toString());
+    ui.Height->setText("高：" + QVariant(ui.image1->height()).toString());
 }
-void QtWidgetsApplication1::decoration() {
-    
+
+void QtWidgetsApplication1::decoration1() {
+    Mat frame = QImage2cvMat(ui.image1->pixmap()->toImage());
+    Mat img1 = imread("ClownGlasses.png", -1);
+    CascadeClassifier detector;
+    //眼部偵測
+    detector.load("haarcascade_eye_tree_eyeglasses.xml");
+    if (!detector.load("haarcascade_eye_tree_eyeglasses.xml")) {
+        QMessageBox::warning(NULL, "MessageBox", "error");
+    }
+    int x, y;
+    std::vector<Rect> eyes;
+    detector.detectMultiScale(frame, eyes, 1.1, 3, 0, Size(30, 30));
+    //for (size_t t = 0; t < eyes.size(); t++) {
+    //    rectangle(frame, eyes[t], Scalar(0, 0, 255), 2, 8);
+    //    std::cout << eyes[t] << std::endl;//兩個框的左上座標
+    //}
+    if (eyes[0].x > eyes[1].x) {
+        x = eyes[1].x;
+        y = eyes[1].y;
+    }
+    else {
+        x = eyes[0].x;
+        y = eyes[0].y;
+    }
+    addphoto(frame, img1, 1, 0.8, 0, Point(x-39, y-40));
+    imshow("test",frame);
+}
+
+void QtWidgetsApplication1::decoration2() {
+    Mat frame = QImage2cvMat(ui.image1->pixmap()->toImage());
+    Mat img1 = imread("dog1.png", -1);
+    Mat img2 = imread("dog2.png", -1);
+    CascadeClassifier detector;
+    detector.load("haarcascade_frontalface_default.xml");
+    if (!detector.load("haarcascade_frontalface_default.xml")) {
+        QMessageBox::warning(NULL, "MessageBox", "error");
+    }
+    std::vector<Rect> faces;
+    detector.detectMultiScale(frame, faces, 1.1, 3, 0, Size(30, 30));
+    addphoto(frame, img1, 1, 0.8, 0, Point(faces[0].x-10, faces[0].y-100));
+    addphoto(frame, img2, 1, 0.8, 0, Point(faces[0].x+35, faces[0].y+80));
+    imshow("test", frame);
+}
+
+void QtWidgetsApplication1::decoration3() {
+    Mat frame = QImage2cvMat(ui.image1->pixmap()->toImage());
+    Mat img1 = imread("SantaClaus1.png", -1);
+    Mat img2 = imread("SantaClaus2.png", -1);
+    CascadeClassifier detector;
+    detector.load("haarcascade_frontalface_default.xml");
+    if (!detector.load("haarcascade_frontalface_default.xml")) {
+        QMessageBox::warning(NULL, "MessageBox", "error");
+    }
+    std::vector<Rect> faces;
+    detector.detectMultiScale(frame, faces, 1.1, 3, 0, Size(30, 30));
+    addphoto(frame, img1, 1, 1, 0, Point(faces[0].x, faces[0].y - 100));
+    addphoto(frame, img2, 1, 1, 0, Point(faces[0].x-30, faces[0].y + 100));
+    imshow("test", frame);
 }
