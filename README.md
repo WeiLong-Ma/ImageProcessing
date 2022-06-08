@@ -2,7 +2,7 @@
 在QT Designer製作介面並使用C++與OpenCV函式庫編寫簡易的影像處理與人臉辨識。
 ![圖片2](https://user-images.githubusercontent.com/72548453/172563528-7a123a35-b232-4f4a-a36c-07667f87d60f.png)
 ---
-## 一、開發環境與建構
+## 一、開發環境與套件
 - Qt Designer
 - OpenCV >= 4.0.1
 - C++ 17 compiler
