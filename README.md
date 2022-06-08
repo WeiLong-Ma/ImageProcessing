@@ -3,12 +3,14 @@
 ![圖片2](https://user-images.githubusercontent.com/72548453/172563528-7a123a35-b232-4f4a-a36c-07667f87d60f.png)
 ---
 ## 一、開發環境與建構
-- Qt 5
+- Qt Designer
 - OpenCV >= 4.0.1
 - C++ 17 compiler
-Windows 10
+- Visual studio 2022
+
+Setup for Windows 10
 ### 軟體安裝
-- Qt
+- Qt Designer
 ```
 https://download.qt.io/
 ```
