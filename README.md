@@ -8,7 +8,6 @@
 - C++ 17 compiler
 - Visual studio 2022
 
-Setup for Windows 10
 ### 軟體安裝
 - Qt Designer
 ```
@@ -18,6 +17,12 @@ https://download.qt.io/
 ```
 wget https://github.com/opencv/opencv/archive/3.2.0.zip
 ```
+- Visual studio 2022
+```
+https://visualstudio.microsoft.com/zh-hant/vs/whatsnew/
+```
+Setup for Windows 10
+
 ---
 ## 二、目前功能
 - ROI感興趣區域裁減
