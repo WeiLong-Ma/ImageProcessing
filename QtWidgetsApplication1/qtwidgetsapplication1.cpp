@@ -110,7 +110,7 @@ void QtWidgetsApplication1::on_OpenFileButton_Clicked() { //qt右下信號編輯
             ui.Width->setText("寬：" + QVariant(ui.image1->width()).toString());
             ui.Height->setText("高：" + QVariant(ui.image1->height()).toString());
             //QVariant可儲存各種類型的資料 支援所有QMetaType
-            //imshow("123",QImage2cvMat(ori_image));
+            imshow("Original_Image",QImage2cvMat(image));
         }
         else {
             QMessageBox::warning(NULL, "訊息方塊", "錯誤");
@@ -452,48 +452,36 @@ bool addphoto(cv::Mat& dst, cv::Mat& src,
     double size = 1.0,//圖片縮放比例
     double angle = 0,//圖片旋轉角度
     cv::Point location = cv::Point(0, 0)//圖片位置
-)
-{
-    /*if (dst.channels() != 3 || src.channels() != 4 || location.x > dst.cols || location.y > dst.cols)
-    {
-        return false;
-    }*/
-
-
+){
     cv::Mat small_size = src.clone();
-
-    if (size != 1 || angle != 0) {
+    if (size != 1 || angle != 0) {//旋轉角度與影像尺寸調整
         int width = src.cols > (dst.cols - location.x) ? (dst.cols - location.x) : src.cols;
         int length = src.rows > (dst.rows - location.y) ? (dst.rows - location.y) : src.rows;
         cv::Mat rotation = cv::getRotationMatrix2D(cv::Point2f(length / 2, width / 2), angle, size);
         cv::warpAffine(small_size, small_size, rotation, cv::Size(width, length));
     }
-    //imshow("test", small_size);
-    //std::cout << small_size.cols << " " << small_size.rows << std::endl;
-    cv::Mat dst_part(dst, cv::Rect(location.x, location.y, small_size.cols, small_size.rows));
-
+    cv::Mat dst_part(dst, cv::Rect(location.x, location.y, small_size.cols, small_size.rows));//切出疊加尺寸相同的影像
     std::vector<cv::Mat>src_channels;
     std::vector<cv::Mat>dst_channels;
-    split(small_size, src_channels);
+    split(small_size, src_channels);////將影像與通道分離
     split(dst_part, dst_channels);
-    //	CV_Assert(src_channels.size() == 4 && dst_channels.size() == 3);
 
-    if (scale < 1)
+    if (scale < 1)//透明度計算
     {
         src_channels[3] *= scale;
         scale = 1;
     }
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 3; i++)//影像的矩陣計算
     {
         dst_channels[i] = dst_channels[i].mul(255.0 / scale - src_channels[3], scale / 255.0);
         dst_channels[i] += src_channels[i].mul(src_channels[3], scale / 255.0);
     }
-    merge(dst_channels, dst_part);
+    merge(dst_channels, dst_part);//將影像與通道合併
     return true;
 }
 
 void QtWidgetsApplication1::OpenVideoCapture() {
-
+    
     CascadeClassifier detector1, detector2;
     detector2.load("haarcascade_eye_tree_eyeglasses.xml");
     detector1.load("haarcascade_frontalface_default.xml");
@@ -549,7 +537,7 @@ void QtWidgetsApplication1::decoration1() {
         y = eyes[0].y;
     }
     addphoto(frame, img1, 1, 0.8, 0, Point(x-39, y-40));
-    imshow("test",frame);
+    imshow("decoration1",frame);
 }
 
 void QtWidgetsApplication1::decoration2() {
@@ -565,7 +553,7 @@ void QtWidgetsApplication1::decoration2() {
     detector.detectMultiScale(frame, faces, 1.1, 3, 0, Size(30, 30));
     addphoto(frame, img1, 1, 0.8, 0, Point(faces[0].x-10, faces[0].y-100));
     addphoto(frame, img2, 1, 0.8, 0, Point(faces[0].x+35, faces[0].y+80));
-    imshow("test", frame);
+    imshow("decoration2", frame);
 }
 
 void QtWidgetsApplication1::decoration3() {
@@ -579,7 +567,7 @@ void QtWidgetsApplication1::decoration3() {
     }
     std::vector<Rect> faces;
     detector.detectMultiScale(frame, faces, 1.1, 3, 0, Size(30, 30));
-    addphoto(frame, img1, 1, 1, 0, Point(faces[0].x, faces[0].y - 100));
-    addphoto(frame, img2, 1, 1, 0, Point(faces[0].x-30, faces[0].y + 100));
-    imshow("test", frame);
+    addphoto(frame, img1, 1, 0.8, 0, Point(faces[0].x, faces[0].y - 100));
+    addphoto(frame, img2, 1, 0.8, 0, Point(faces[0].x-30, faces[0].y + 100));
+    imshow("decoration3", frame);
 }
